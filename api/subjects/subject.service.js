@@ -3,11 +3,12 @@ const pool = require('../../config/database');
 module.exports = {
     create: (data, callBack) => {
         pool.query(
-            'INSERT INTO semesters(semester_id, name, level_id) VALUES(?,?,?);',
+            'INSERT INTO subjects(subject_id, name, teacher_id, semester_id) VALUES(?,?,?,?);',
             [
-                data.semester_id,
+                data.subject_id,
                 data.name,
-                data.level_id
+                data.teacher_id,
+                data.semester_id
             ],
             (err, result, fields) => {
                 if(err) {
@@ -17,9 +18,9 @@ module.exports = {
             }           
         ); 
     },
-    getSemesters: callBack => {
+    getSubjects: callBack => {
         pool.query(
-            'SELECT *  FROM semesters',
+            'SELECT * FROM subjects',
             [],
             (err, results, fields) => {
                 if(err) {
@@ -29,10 +30,10 @@ module.exports = {
             }
         );
     },
-    getSemesterBySemesterId: (semester_id, callBack) => {
+    getSubjectBySubjectId: (subject_id, callBack) => {
         pool.query(
-            'SELECT * FROM semesters WHERE semester_id = ?',
-            [semester_id],
+            'SELECT * FROM subjects WHERE subject_id = ?',
+            [subject_id],
             (err, results, fields) => {
                 if(err) {
                     return callBack(err);
@@ -42,13 +43,14 @@ module.exports = {
 
         );
     },
-    updateSemester: (data, callBack) => {
+    updateSubject: (data, callBack) => {
         pool.query(
-            'UPDATE semesters SET  name=?, level_id=?  WHERE semester_id=?',
+            'UPDATE subjects SET  name=?, teacher_id=?, semester_id=?  WHERE subject_id=?',
             [
                 data.name,
-                data.level_id,
-                data.semester_id
+                data.teacher_id,
+                data.semester_id,
+                data.subject_id
             ],
             (err, results, fields) => {
                 if(err) {
@@ -59,10 +61,10 @@ module.exports = {
 
         );
     },
-    deleteSemester: (data, callBack) => {
+    deleteSubject: (data, callBack) => {
         pool.query(
-            'DELETE FROM semesters WHERE semester_id = ?',
-            [data.semester_id],
+            'DELETE FROM subjects WHERE subject_id = ?',
+            [data.subject_id],
             (err, results, fields) => {
                 if(err) {
                     return callBack(err);

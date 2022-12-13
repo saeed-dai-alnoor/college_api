@@ -3,10 +3,11 @@ const pool = require('../../config/database');
 module.exports = {
     create: (data, callBack) => {
         pool.query(
-            'INSERT INTO semesters(semester_id, name, level_id) VALUES(?,?,?);',
+            'INSERT INTO students(student_id, name, phone, level_id) VALUES(?,?,?,?);',
             [
-                data.semester_id,
+                data.student_id,
                 data.name,
+                data.phone,
                 data.level_id
             ],
             (err, result, fields) => {
@@ -17,9 +18,9 @@ module.exports = {
             }           
         ); 
     },
-    getSemesters: callBack => {
+    getStudents: callBack => {
         pool.query(
-            'SELECT *  FROM semesters',
+            'SELECT student_id, name, level_id FROM students',
             [],
             (err, results, fields) => {
                 if(err) {
@@ -29,10 +30,10 @@ module.exports = {
             }
         );
     },
-    getSemesterBySemesterId: (semester_id, callBack) => {
+    getStudentByStudentId: (student_id, callBack) => {
         pool.query(
-            'SELECT * FROM semesters WHERE semester_id = ?',
-            [semester_id],
+            'SELECT student_id, name, level_id FROM students WHERE student_id = ?',
+            [student_id],
             (err, results, fields) => {
                 if(err) {
                     return callBack(err);
@@ -42,13 +43,14 @@ module.exports = {
 
         );
     },
-    updateSemester: (data, callBack) => {
+    updateStudent: (data, callBack) => {
         pool.query(
-            'UPDATE semesters SET  name=?, level_id=?  WHERE semester_id=?',
+            'UPDATE students SET name=?, phone=?, level_id=? WHERE student_id = ?',
             [
                 data.name,
+                data.phone,
                 data.level_id,
-                data.semester_id
+                data.student_id
             ],
             (err, results, fields) => {
                 if(err) {
@@ -59,10 +61,10 @@ module.exports = {
 
         );
     },
-    deleteSemester: (data, callBack) => {
+    deleteStudent: (data, callBack) => {
         pool.query(
-            'DELETE FROM semesters WHERE semester_id = ?',
-            [data.semester_id],
+            'DELETE FROM students WHERE student_id = ?',
+            [data.student_id],
             (err, results, fields) => {
                 if(err) {
                     return callBack(err);
@@ -72,4 +74,18 @@ module.exports = {
             }
         );
     },
+    getStudentIdForLogin: (student_id, callBack) => {
+        pool.query(
+            'SELECT * FROM students WHERE student_id = ?',
+            [student_id],
+            (err, results, fields) => {
+                if(err) {
+                    return callBack(err);
+                }
+                return callBack(null, results[0]);
+            }
+
+        );
+    },
+
 };
