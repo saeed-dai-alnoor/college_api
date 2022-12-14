@@ -114,6 +114,7 @@ module.exports = {
                     return res.json({
                         success: 1,
                         message: 'login successfuly',
+                        data:results,
                         token: jsonwebtoken
                     });
                 } else {
