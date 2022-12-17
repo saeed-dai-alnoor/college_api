@@ -8,6 +8,7 @@ const semesterRouter = require('./api/semesters/semester.router');
 const teacherRouter = require('./api/teachers/teacher.router');
 const subjectRouter = require('./api/subjects/subject.router');
 const studentRouter = require('./api/students/student.router');
+const managerRouter = require('./api/managers/manager.router');
 
 app.use(express.json());
 
@@ -17,5 +18,6 @@ app.use('/api/semesters', semesterRouter);
 app.use('/api/teachers', teacherRouter);
 app.use('/api/subjects', subjectRouter);
 app.use('/api/students', studentRouter);
+app.use('/api/managers', managerRouter);
 // run server 
 app.listen(process.env.APP_PORT, () => console.log('Sever running on port', process.env.APP_PORT));
