@@ -20,8 +20,8 @@ module.exports = {
         });
     },
     getLevelByLevelId: (req, res) => {
-        const level_id = req.params.level_id;
-        getUserByUserId(level_id, (err, results) => {
+        const data = req.body;
+        getLevelByLevelId(data, (err, results) => {
             if(err) {
                 console.log(err);
                 return;
@@ -74,7 +74,7 @@ module.exports = {
     },
     deleteLevel: (req, res) => {
         const data = req.body;
-        deleteUser(data, (err, results) => {
+        deleteLevel(data, (err, results) => {
             if (err) {
                 console.log(err);
                 return;

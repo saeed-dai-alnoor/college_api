@@ -28,19 +28,20 @@ module.exports = {
             }
         );
     },
-    getLevelByLevelId: (level_id, callBack) => {
+    getLevelByLevelId: (data, callBack) => {
         pool.query(
-            'SELECT level_id, name FROM registration WHERE level_id = ?',
-            [level_id],
+            'SELECT students.student_id, students.name FROM levels JOIN students ON students.level_id  = levels.level_id WHERE levels.level_id = ?',
+            [data.level_id],
             (err, results, fields) => {
                 if(err) {
                     return callBack(err);
                 }
-                return callBack(null, results[0]);
+                return callBack(null, results);
             }
 
         );
     },
+
     updateLevel: (data, callBack) => {
         pool.query(
             'UPDATE levels SET level_id=?, name=? WHERE level_id = ?',

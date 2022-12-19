@@ -20,4 +20,4 @@ app.use('/api/subjects', subjectRouter);
 app.use('/api/students', studentRouter);
 app.use('/api/managers', managerRouter);
 // run server 
-app.listen(process.env.APP_PORT, () => console.log('Sever running on port', process.env.APP_PORT));
+app.listen(process.env.APP_PORT, () => console.log('Server running on port', process.env.APP_PORT));
