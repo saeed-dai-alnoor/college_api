@@ -3,7 +3,7 @@ const router = require('express').Router();
 
 router.post('/',  createSemester);
 router.get('/',   getSemesters);
-router.get('/:semester_id',   getSemesterBySemesterId);
+router.post('/subjects',   getSemesterBySemesterId);
 router.patch('/' , updateSemester);
 router.delete('/', deleteSemester);
 

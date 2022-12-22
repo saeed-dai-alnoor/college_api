@@ -29,15 +29,15 @@ module.exports = {
             }
         );
     },
-    getSemesterBySemesterId: (semester_id, callBack) => {
+    getSemesterBySemesterId: (data, callBack) => {
         pool.query(
-            'SELECT * FROM semesters WHERE semester_id = ?',
-            [semester_id],
+            'SELECT subjects.name AS subject_name, teachers.name AS teacher_name FROM subjects JOIN semesters ON semesters.semester_id = subjects.semester_id JOIN teachers ON teachers.teacher_id = subjects.teacher_id WHERE semesters.semester_id = ?',
+            [data.semester_id],
             (err, results, fields) => {
                 if(err) {
                     return callBack(err);
                 }
-                return callBack(null, results[0]);
+                return callBack(null, results);
             }
 
         );

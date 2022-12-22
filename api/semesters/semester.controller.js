@@ -20,8 +20,8 @@ module.exports = {
         });
     },
     getSemesterBySemesterId: (req, res) => {
-        const semester_id = req.params.semester_id;
-        getSemesterBySemesterId(semester_id, (err, results) => {
+        const data = req.body;
+        getSemesterBySemesterId(data, (err, results) => {
             if(err) {
                 console.log(err);
                 return;
