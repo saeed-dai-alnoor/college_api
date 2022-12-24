@@ -31,7 +31,7 @@ module.exports = {
     },
     getSemesterBySemesterId: (data, callBack) => {
         pool.query(
-            'SELECT subjects.name AS subject_name, teachers.name AS teacher_name FROM subjects JOIN semesters ON semesters.semester_id = subjects.semester_id JOIN teachers ON teachers.teacher_id = subjects.teacher_id WHERE semesters.semester_id = ?',
+            'SELECT subjects.name AS subject_name, teachers.name AS teacher_name, semesters.semester_id, level_id FROM subjects JOIN semesters ON semesters.semester_id = subjects.semester_id JOIN teachers ON teachers.teacher_id = subjects.teacher_id WHERE semesters.semester_id = ?',
             [data.semester_id],
             (err, results, fields) => {
                 if(err) {
